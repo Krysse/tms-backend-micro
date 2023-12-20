@@ -19,7 +19,7 @@ exports.CreateTask = async (req, res) => {
    * If they are not present, we will send an error response
    * The error code PS001 is for missing parameters
    */
-  if (!username || !password || !Task_name || !Task_app_Acronym) {
+  if (username === null || username === undefined || password === null || password === undefined || Task_name === null || Task_name === undefined || Task_app_Acronym === null || Task_app_Acronym === undefined) {
     return res.json({
       code: "PS001"
     })
@@ -133,7 +133,8 @@ exports.getTaskbyState = async (req, res) => {
    * If they are not present, we will send an error response
    * The error code PS001 is for missing parameters
    */
-  if (!username || !password || !Task_state || !Task_app_Acronym) {
+  console.log(typeof username)
+  if (username === null || username === undefined || password === null || password === undefined || Task_state === null || Task_state === undefined || Task_app_Acronym === null || Task_app_Acronym === undefined) {
     return res.json({
       code: "PS001"
     })
@@ -211,7 +212,7 @@ exports.PromoteTask2Done = async (req, res) => {
    * If they are not present, we will send an error response
    * The error code PS001 is for missing parameters
    */
-  if (!username || !password || !Task_id || !Task_app_Acronym) {
+  if (username === null || username === undefined || password === null || password === undefined || Task_id === null || Task_id === undefined || Task_app_Acronym === null || Task_app_Acronym === undefined) {
     return res.json({
       code: "PS001"
     })
