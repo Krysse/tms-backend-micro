@@ -126,7 +126,7 @@ exports.CreateTask = async (req, res) => {
   })
 }
 
-exports.getTaskbyState = async (req, res) => {
+exports.GetTaskbyState = async (req, res) => {
   const { username, password, Task_state, Task_app_Acronym, Task_notes } = req.body
   /*
    * We are checking if the mandatory fields (username, password, Task_state, Task_app_Acronym) are present in the request parameters
@@ -192,13 +192,15 @@ exports.getTaskbyState = async (req, res) => {
       code: "T002"
     })
   }
-
-  const [row2, fields2] = await connection.promise().query("SELECT * FROM task WHERE Task_state = ? AND Task_app_acronym = ?", [Task_state, Task_app_Acronym])
-  if (row2.length === 0) {
+  let [row2, fields2] = [null, null]
+  try {
+    ;[row2, fields2] = await connection.promise().query("SELECT * FROM task WHERE Task_state = ? AND Task_app_acronym = ?", [Task_state, Task_app_Acronym])
+  } catch (error) {
     return res.json({
       code: "T003"
     })
   }
+
   return res.json({
     code: "S001",
     data: row2
