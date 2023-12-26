@@ -104,6 +104,13 @@ exports.CreateTask = async (req, res) => {
   //Generate Task_createDate, the date is in the format YYYY-MM-DD HH:MM:SS. This is using current local time
   const Task_createDate = new Date().toISOString().slice(0, 19).replace("T", " ")
 
+  //Check if Task_name is empty string
+  if (Task_name === "") {
+    return res.json({
+      code: "T003"
+    })
+  }
+
   //Insert task into database
   const result = await connection.promise().execute("INSERT INTO task (Task_name, Task_description, Task_notes, Task_id, Task_plan, Task_app_acronym, Task_state, Task_creator, Task_owner, Task_createDate) VALUES (?,?,?,?,?,?,?,?,?,?)", [Task_name, Task_description, Task_notes, Task_id, null, Task_app_Acronym, Task_state, Task_creator, Task_owner, Task_createDate])
   if (result[0].affectedRows === 0) {
