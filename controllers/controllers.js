@@ -140,7 +140,6 @@ exports.GetTaskbyState = async (req, res) => {
    * If they are not present, we will send an error response
    * The error code PS001 is for missing parameters
    */
-  console.log(typeof username)
   if (username === null || username === undefined || password === null || password === undefined || Task_state === null || Task_state === undefined || Task_app_Acronym === null || Task_app_Acronym === undefined) {
     return res.json({
       code: "PS001"
@@ -326,7 +325,8 @@ exports.PromoteTask2Done = async (req, res) => {
   }
 
   return res.json({
-    code: "S001"
+    code: "S001",
+    Task_id: Task_id
   })
 }
 
